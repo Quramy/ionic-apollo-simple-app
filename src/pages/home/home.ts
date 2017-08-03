@@ -1,26 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Apollo, ApolloQueryObservable } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
 import { UsersQuery, UserSummaryFragment } from '../../__generated__';
 import { Observable } from 'rxjs/Observable';
 
-const userFragment = gql`
+const query = gql`
   fragment UserSummary on User {
     id, name
   }
-`;
 
-const query = gql`
   query Users {
-    viewer {
-      users(first: 100) {
-        edges {
-          node {
-            ...UserSummary,
-          }
-        }
-      }
+    allUsers(last: 100) {
+      ...UserSummary,
     }
   }
 `;
@@ -34,29 +26,23 @@ const query = gql`
       </ion-navbar>
     </ion-header>
     <ion-content>
-      <ion-list *ngIf="query$ | async">
-        <button ion-item *ngFor="let user of query$ | async">
+      <ion-list>
+        <button ion-item *ngFor="let user of users$ | async">
           {{user.name}}
         </button>
       </ion-list>
     </ion-content>
   `,
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-  query$: Observable<UserSummaryFragment[]>;
+  users$: Observable<UserSummaryFragment[]>;
 
   constructor(
     public navCtrl: NavController,
     private apollo: Apollo,
   ) {
-    this.query$ = this.apollo.watchQuery<UsersQuery>({ query })
-      .map(({ data }) => data.viewer.users.edges.map(e => e.node));
-  }
-
-  ngOnInit() {
-    this.query$.subscribe(x => {
-      console.log(x);
-    });
+    this.users$ = this.apollo.query<UsersQuery>({ query })
+      .map(({ data }) => data.allUsers);
   }
 }

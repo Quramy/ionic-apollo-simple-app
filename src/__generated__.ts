@@ -2,22 +2,14 @@
 //  This file was automatically generated and should not be edited.
 
 export type UsersQuery = {
-  viewer:  {
-    users:  {
-      // A list of edges.
-      edges:  Array< {
-        // The item at the end of the edge
-        node:  {
-          id: string,
-          name: string,
-        } | null,
-      } | null > | null,
-    } | null,
-  } | null,
+  allUsers:  Array< {
+    id: string,
+    name: string | null,
+  } >,
 };
 
 export type UserSummaryFragment = {
   id: string,
-  name: string,
+  name: string | null,
 };
 /* tslint:enable */

@@ -15,7 +15,7 @@ import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import { ApolloModule } from 'apollo-angular';
 
 export const client = new ApolloClient({
-  networkInterface: createNetworkInterface('http://localhost:4200/graphql'),
+  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/cipglmpu146dt01mzwqctkbwd'),
 });
 
 export function provideClient(): ApolloClient {
