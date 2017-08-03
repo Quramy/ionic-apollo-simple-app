@@ -11,6 +11,17 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { ApolloModule } from 'apollo-angular';
+
+export const client = new ApolloClient({
+  networkInterface: createNetworkInterface('http://localhost:4200/graphql'),
+});
+
+export function provideClient(): ApolloClient {
+  return client;
+}
+
 @NgModule({
   declarations: [
     MyApp,
@@ -21,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    ApolloModule.forRoot(provideClient),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
