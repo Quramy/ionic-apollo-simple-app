@@ -11,16 +11,14 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { ApolloClient, createNetworkInterface } from 'apollo-client';
-import { ApolloModule } from 'apollo-angular';
+import { ApolloClient } from 'apollo-client';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { HttpClientModule, HttpHeaders } from "@angular/common/http";
+import { HttpModule } from '@angular/http';
 
-export const client = new ApolloClient({
-  networkInterface: createNetworkInterface('https://api.graph.cool/simple/v1/cipglmpu146dt01mzwqctkbwd'),
-});
 
-export function provideClient(): ApolloClient {
-  return client;
-}
 
 @NgModule({
   declarations: [
@@ -32,8 +30,11 @@ export function provideClient(): ApolloClient {
   ],
   imports: [
     BrowserModule,
+    HttpModule,  
+    HttpClientModule,    
+    HttpLinkModule,
     IonicModule.forRoot(MyApp),
-    ApolloModule.forRoot(provideClient),
+    ApolloModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,7 +47,27 @@ export function provideClient(): ApolloClient {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+
+export class AppModule {
+  constructor(
+    apollo: Apollo,
+    httpLink: HttpLink
+  ) {
+
+    // if token is used uncmment this AND header section
+    // let token = "";
+
+    apollo.create({
+      link: httpLink.create({
+        uri: "https://api.graph.cool/simple/v1/cipglmpu146dt01mzwqctkbwd",    
+        // headers: new HttpHeaders({
+        //   authorization: "Bearer " + token
+        // })
+      }),
+      cache: new InMemoryCache()
+    });
+  }
+}
