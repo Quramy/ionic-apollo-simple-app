@@ -34,7 +34,7 @@
     "ionic-angular": "^3.8.0",
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
-    "sw-toolbox": "3.7.0",
+    "sw-toolbox": "3.6.0",
     "zone.js": "0.8.17"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "apollo-codegen": "^0.17.1",
     "ionic": "3.15.2",
     "ts-graphql-plugin": "^1.1.1",
-    "typescript": "2.3.4"
+    "typescript": "^2.5.3"
   },
   "description": "An Ionic project"
 }
