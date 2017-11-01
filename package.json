@@ -10,7 +10,7 @@
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "gen": "apollo-codegen generate --target ts --output src/__generated__.ts \"src/**/*.ts\""
+    "gen": "apollo-codegen generate --target ts --schema schema.json --output src/__generated__.ts \"src/**/*.ts\""
   },
   "dependencies": {
     "@angular/common": "4.4.4",
