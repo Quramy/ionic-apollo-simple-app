@@ -10,7 +10,7 @@
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "gen": "apollo-codegen generate --target ts --output src/__generated__.ts \"src/**/*.ts\""
+    "gen": "apollo-codegen generate --target ts --schema schema.json --output src/__generated__.ts \"src/**/*.ts\""
   },
   "dependencies": {
     "@angular/common": "4.4.4",
@@ -25,8 +25,8 @@
     "@ionic-native/splash-screen": "3.12.1",
     "@ionic-native/status-bar": "3.12.1",
     "@ionic/storage": "2.0.1",
-    "apollo-angular": "^1.0.0-beta.1",
-    "apollo-angular-link-http": "^1.0.0-beta.1",
+    "apollo-angular": "1.0.0",
+    "apollo-angular-link-http": "1.0.1",
     "apollo-cache-inmemory": "^1.0.0",
     "apollo-client": "^2.0.1",
     "graphql": "^0.11.7",
@@ -34,7 +34,7 @@
     "ionic-angular": "^3.8.0",
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
-    "sw-toolbox": "3.7.0",
+    "sw-toolbox": "3.6.0",
     "zone.js": "0.8.17"
   },
   "devDependencies": {
@@ -44,7 +44,7 @@
     "apollo-codegen": "^0.17.1",
     "ionic": "3.15.2",
     "ts-graphql-plugin": "^1.1.1",
-    "typescript": "2.3.4"
+    "typescript": "^2.5.3"
   },
   "description": "An Ionic project"
 }
